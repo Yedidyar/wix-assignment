@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Ticket } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreationTimeFilterDto } from './dto/creation-time-filter.dto';
 
 @Injectable()

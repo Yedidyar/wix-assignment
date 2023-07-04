@@ -2,6 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreationTimeFilterDto } from './dto/creation-time-filter.dto';
+import { FindAllTicketsOutputDto } from './dto/find-all-tickets-output.dto';
 
 @ApiTags('tickets')
 @Controller('tickets')
@@ -28,7 +29,7 @@ export class TicketsController {
     @Query('content') content?: string,
     @Query('email') email?: string,
     @Query() creationTimeFilter?: CreationTimeFilterDto,
-  ) {
+  ): Promise<FindAllTicketsOutputDto[]> {
     return this.ticketsService.findAll(
       { content, title, userEmail: email },
       creationTimeFilter,
