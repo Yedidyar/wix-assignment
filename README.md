@@ -33,6 +33,10 @@ $ pnpm run test:e2e
 # test coverage
 $ pnpm run test:cov
 ```
+## Docs
+
+your welcome to use the swagger ui docs on:
+http://localhost:3000/api/docs
 
 ## License
 
