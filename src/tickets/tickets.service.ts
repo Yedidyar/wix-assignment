@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Ticket } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreationTimeFilterDto } from './dto/creation-time-filter.dto';
+import { QueryParamsDto } from './dto/query-params.dto';
 
 @Injectable()
 export class TicketsService {
   constructor(private prisma: PrismaService) {}
 
-  findAll(
-    where: Partial<Pick<Ticket, 'content' | 'title' | 'userEmail'>>,
-    creationTimeFilter: CreationTimeFilterDto,
-  ): Promise<Ticket[]> {
+  findAll({
+    creation_time_from,
+    creation_time_to,
+    email,
+    ...rest
+  }: QueryParamsDto): Promise<Ticket[]> {
     return this.prisma.ticket.findMany({
       where: {
-        ...where,
+        ...rest,
+        userEmail: email,
         creationTime: {
-          gte: creationTimeFilter.creation_time_from,
-          lte: creationTimeFilter.creation_time_to,
+          gte: creation_time_from,
+          lte: creation_time_to,
         },
       },
     });
