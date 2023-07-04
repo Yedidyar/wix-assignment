@@ -16,5 +16,5 @@ model Ticket {
   content      String
   userEmail    String
   creationTime DateTime
-  lables       String[]
+  labels       String[]
 }
